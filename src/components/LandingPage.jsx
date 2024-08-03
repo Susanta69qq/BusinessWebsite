@@ -91,7 +91,7 @@ function LandingPage() {
           <div
             ref={workWithUs}
             className="relative px-5 py-2 border-[1px] border-zinc-400 font-light rounded-full flex items-center gap-2 capitalize overflow-hidden"
-            style={{ color: "#ffffff" }} // Initial text color for smooth animation
+            style={{ color: "#ffffff" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
