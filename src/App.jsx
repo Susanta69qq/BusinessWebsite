@@ -1,8 +1,8 @@
-import About from "./components/About"
-import Footer from "./components/Footer"
-import LandingPage from "./components/LandingPage"
-import Navbar from "./components/Navbar"
-import Services from "./components/Services"
+import About from "./components/About";
+import Footer from "./components/Footer";
+import LandingPage from "./components/LandingPage";
+import Navbar from "./components/Navbar";
+import Services from "./components/Services";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <About />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
