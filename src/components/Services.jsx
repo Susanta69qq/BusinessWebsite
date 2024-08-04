@@ -177,14 +177,14 @@ const Services = () => {
   const servicesSectionRef = useRef(null);
 
   useEffect(() => {
-
     gsap.fromTo(
       headingRef.current,
       { y: 200, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1.5,
+        duration: 2.5,
+        transition: "all ease 0.1s",
         ease: "power3.out",
         // Optionally, add scrollTrigger if you want it to animate on scroll
         scrollTrigger: {
@@ -196,7 +196,6 @@ const Services = () => {
       }
     );
 
-
     const textSections = textSectionRef.current.children;
     gsap.utils.toArray(textSections).forEach((section, index) => {
       gsap.fromTo(
@@ -205,7 +204,8 @@ const Services = () => {
         {
           x: 0,
           opacity: 1,
-          duration: 1.5,
+          duration: 2,
+          transition: "all ease 0.5s",
           scrollTrigger: {
             trigger: section,
             start: "top 80%",
@@ -224,7 +224,8 @@ const Services = () => {
         {
           x: 0,
           opacity: 1,
-          duration: 1.5,
+          duration: 2,
+          transition: "all ease 0.1s",
           scrollTrigger: {
             trigger: image,
             start: "top 80%",
@@ -238,17 +239,23 @@ const Services = () => {
 
   return (
     <div className="bg-zinc-900 py-12">
-      <div ref={servicesSectionRef} className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <h1 ref={headingRef} className="heading text-4xl font-bold text-center text-white mb-[15vw]">
+      <div
+        ref={servicesSectionRef}
+        className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12"
+      >
+        <h1
+          ref={headingRef}
+          className="heading text-4xl font-bold text-center text-white"
+        >
           Our Services
         </h1>
 
-        <div className="sections flex justify-center overflow-hidden gap-4">
+        <div className="sections flex justify-center overflow-hidden gap-4 mt-[10vw]">
           <div className="textSection" ref={textSectionRef}>
             {sections.map((section, index) => (
               <div className="flex mb-12 gap-10" key={index}>
                 <section className="p-6 rounded-xl text-white w-[45vw] bg-gray-800">
-                  <h2 className="text-2xl md:text-3xl font-semibold text-blue-600 mb-4 text-center">
+                  <h2 className="text-3xl md:text-3xl font-semibold text-blue-600 mb-4 text-center">
                     {section.title}
                   </h2>
                   <p className="mb-6 text-[15px]">{section.description}</p>
