@@ -65,7 +65,7 @@ const ContactForm = ({ isVisible, onClose }) => {
             <label className="block text-sm font-medium text-gray-700">
               Message(optional)?
             </label>
-            <textarea placeholder="What would you want us to build for you?"
+            <textarea placeholder="Tell us what you have on mind?"
               className="mt-1 block px-2 text-[15px] w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 text-gray-900"
             ></textarea>
           </div>
