@@ -1,9 +1,55 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "remixicon/fonts/remixicon.css";
 
+gsap.registerPlugin(ScrollTrigger);
+
 function Footer() {
+
+  const footerHeadSection = useRef(null);
+  const buttonSection = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline();
+    tl.fromTo(footerHeadSection.current,
+      {y: 200, opacity: 0},
+      {
+        y: 0,
+        opacity: 1,
+        duration: 2.5,
+        ease: "power3.out",
+        transition: "all ease 0.5s",
+        scrollTrigger: {
+          trigger: footerHeadSection.current,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+        },
+      }
+    );
+
+    tl.fromTo(buttonSection.current,
+      {y: 200, opacity: 0,},
+      {
+        y: 0,
+        opacity: 1,
+        duration: 2.5,
+        ease: "power3.out",
+        transition: "all ease 0.5s",
+        scrollTrigger: {
+          trigger: footerHeadSection.current,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+        },
+      },
+    );
+  }, [])
+
   return (
     <div className="w-full h-screen bg-zinc-900 px-20">
-      <div className="px-20 py-16 text-center">
+      <div ref={footerHeadSection} className="px-20 py-16 text-center">
         <h1 className="text-8xl font-semibold tracking-tighter">
           Ready To Try
         </h1>
@@ -14,8 +60,8 @@ function Footer() {
           Join [Brand Name] to accelerate your Business online!
         </h1>
       </div>
-      <div className="w-full flex justify-center">
-        <div className="bg-[#2263EB] px-6 py-3 rounded-md">
+      <div ref={buttonSection} className="w-full flex justify-center">
+        <div className="bg-[#2263EB] px-6 py-3 rounded-md hover:bg-blue-800 hover:text-gray-200 transition-all cursor-pointer">
           <a className="font-semibold" href="#">
             Get Started it's free
           </a>
@@ -25,10 +71,18 @@ function Footer() {
       <footer className="mt-8 flex justify-between items-center">
         <p>© 2024 [Brand Name], Inc. All rights reserved</p>
         <div className="social flex gap-5 text-[18px] opacity-60">
-          <a href="#"><i class="ri-twitter-x-line"></i></a>
-          <a href="#"><i class="ri-linkedin-line"></i></a>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-          <a href="#"><i class="ri-facebook-fill"></i></a>
+          <a className="hover:text-[#1DA1F2]" href="#">
+            <i class="ri-twitter-x-line"></i>
+          </a>
+          <a className="hover:text-[#0073B2]" href="#">
+            <i class="ri-linkedin-line"></i>
+          </a>
+          <a className="hover:text-[#FE4341]" href="#">
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a className="hover:text-[#0F8FF2]" href="#">
+            <i class="ri-facebook-fill"></i>
+          </a>
         </div>
       </footer>
     </div>
