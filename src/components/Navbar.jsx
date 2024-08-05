@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { HashLink as Link } from "react-router-hash-link";
 import gsap from "gsap";
 
 function Navbar() {
@@ -19,29 +20,53 @@ function Navbar() {
       link.appendChild(underline);
 
       link.addEventListener("mouseenter", () => {
-        gsap.to(underline, { scaleX: 1, transformOrigin: "right", duration: 0.3 });
+        gsap.to(underline, {
+          scaleX: 1,
+          transformOrigin: "right",
+          duration: 0.3,
+        });
       });
 
       link.addEventListener("mouseleave", () => {
-        gsap.to(underline, { scaleX: 0, transformOrigin: "left", duration: 0.3 });
+        gsap.to(underline, {
+          scaleX: 0,
+          transformOrigin: "left",
+          duration: 0.3,
+        });
       });
     });
   }, []);
 
   return (
-    <div className='fixed z-[999] w-full px-4 sm:px-8 md:px-20 py-4 sm:py-6 md:py-8 flex flex-col sm:flex-row justify-between items-center'>
-      <h3 className='text-lg sm:text-xl md:text-2xl mb-4 sm:mb-0'>Brand Name</h3>
+    <div className="fixed z-[999] w-full px-4 sm:px-8 md:px-20 py-4 sm:py-6 md:py-8 flex flex-col sm:flex-row justify-between items-center">
+      <h3 className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-0">
+        Brand Name
+      </h3>
       <div className="links flex gap-4 sm:gap-6 md:gap-8">
-        {["Services", "About Us", "Contact Us"].map((link, index) => (
-          <a
-            key={index}
-            className='text-sm sm:text-md md:text-lg font-regular capitalize'
-            href=""
-            ref={(el) => (links.current[index] = el)}
-          >
-            {link}
-          </a>
-        ))}
+        <Link
+          smooth
+          to="#services"
+          className="text-sm sm:text-md md:text-lg font-regular capitalize"
+          ref={(el) => (links.current[0] = el)}
+        >
+          Services
+        </Link>
+        <Link
+          smooth
+          to="#about"
+          className="text-sm sm:text-md md:text-lg font-regular capitalize"
+          ref={(el) => (links.current[1] = el)}
+        >
+          About us
+        </Link>
+        <Link
+          smooth
+          to="#contact"
+          className="text-sm sm:text-md md:text-lg font-regular capitalize"
+          ref={(el) => (links.current[2] = el)}
+        >
+          Contact us
+        </Link>
       </div>
     </div>
   );

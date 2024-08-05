@@ -8,10 +8,18 @@ function App() {
   return (
     <div className="w-full h-screen text-white">
       <Navbar />
-      <LandingPage />
-      <Services />
-      <About />
-      <Footer />
+      <div id="landing">
+        <LandingPage />
+      </div>
+      <div id="services">
+        <Services />
+      </div>
+      <div id="about">
+        <About />
+      </div>
+      <div id="contact">
+        <Footer />
+      </div>
     </div>
   );
 }
