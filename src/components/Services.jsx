@@ -4,34 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// const renderServiceSection = (title, description, items) => (
-//   <div className="flex mb-12 gap-10" key={title}>
-//     <section className="p-6 rounded-xl text-white w-[45vw]">
-//       <h2 className="text-2xl md:text-3xl font-semibold text-blue-600 mb-4 text-center inline-block">
-//         {title}
-//       </h2>
-//       <p className="mb-6 text-[15px]">{description}</p>
-//       <ul className="list-disc list-inside space-y-2 text-[14px]">
-//         {items.map((item, index) => (
-//           <li key={index}>
-//             <strong>{item.label}:</strong> {item.description}
-//           </li>
-//         ))}
-//       </ul>
-//     </section>
-//   </div>
-// );
-
-// const renderImage = (src, index) => (
-//   <img
-//     key={index}
-//     className="absolute top-0 left-0 w-full h-full object-cover"
-//     src={src}
-//     alt=""
-//   />
-// );
-
-// Sections data
 const sections = [
   {
     title: "Custom Web Development",
@@ -175,6 +147,7 @@ const Services = () => {
   const imageSectionRef = useRef(null);
   const headingRef = useRef(null);
   const servicesSectionRef = useRef(null);
+  const paragraphRef = useRef(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -184,9 +157,27 @@ const Services = () => {
         y: 0,
         opacity: 1,
         duration: 2.5,
-        transition: "all ease 0.1s",
+        transition: "all ease 0.5s",
         ease: "power3.out",
-        // Optionally, add scrollTrigger if you want it to animate on scroll
+        scrollTrigger: {
+          trigger: servicesSectionRef.current,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      paragraphRef.current,
+      { y: 200, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 2,
+        transition: "all ease 0.5s",
+        ease: "power3.out",
+        stagger: 0.5,
         scrollTrigger: {
           trigger: servicesSectionRef.current,
           start: "top 80%",
@@ -245,10 +236,16 @@ const Services = () => {
       >
         <h1
           ref={headingRef}
-          className="heading text-4xl font-bold text-center text-white"
+          className="heading text-4xl font-bold text-center text-white mb-6"
         >
           Our Services
         </h1>
+        <p
+          ref={paragraphRef}
+          className="text-center text-lg text-gray-400 mb-16"
+        >
+          Harness the power of cutting-edge technology to craft robust and scalable digital solutions. From dynamic web applications to intuitive user interfaces, we deliver exceptional results that drive business growth and enhance user experiences. Transform your vision into reality with our expert web and app development services.
+        </p>
 
         <div className="sections flex justify-center overflow-hidden gap-4 mt-[10vw]">
           <div className="textSection" ref={textSectionRef}>
@@ -277,7 +274,7 @@ const Services = () => {
             {images.map((src, index) => (
               <img
                 key={index}
-                className="w-full h-full object-cover mb-[3.7vw] rounded-xl"
+                className="w-full h-full object-cover mb-[3.7vw] rounded-xl border-4 border-spacing-4 border-[#495e7a]"
                 src={src}
                 alt={`Service ${index + 1}`}
               />
