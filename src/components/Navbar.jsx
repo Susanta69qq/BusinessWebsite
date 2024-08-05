@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
-import { HashLink as Link } from "react-router-hash-link";
-import gsap from "gsap";
+import { useState, useRef, useEffect } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
+import gsap from 'gsap';
+import ContactForm from './ContactForm';
 
-function Navbar() {
+const Navbar = () => {
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const links = useRef([]);
 
   useEffect(() => {
@@ -37,39 +39,48 @@ function Navbar() {
     });
   }, []);
 
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    setIsFormVisible(true);
+  };
+
   return (
-    <div className="fixed z-[999] w-full px-4 sm:px-8 md:px-20 py-4 sm:py-6 md:py-8 flex flex-col sm:flex-row justify-between items-center">
-      <h3 className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-0">
-        Brand Name
-      </h3>
-      <div className="links flex gap-4 sm:gap-6 md:gap-8">
-        <Link
-          smooth
-          to="#services"
-          className="text-sm sm:text-md md:text-lg font-regular capitalize"
-          ref={(el) => (links.current[0] = el)}
-        >
-          Services
-        </Link>
-        <Link
-          smooth
-          to="#about"
-          className="text-sm sm:text-md md:text-lg font-regular capitalize"
-          ref={(el) => (links.current[1] = el)}
-        >
-          About us
-        </Link>
-        <Link
-          smooth
-          to="#contact"
-          className="text-sm sm:text-md md:text-lg font-regular capitalize"
-          ref={(el) => (links.current[2] = el)}
-        >
-          Contact us
-        </Link>
+    <div>
+      <div className="fixed z-[999] w-full px-4 sm:px-8 md:px-20 py-4 sm:py-6 md:py-8 flex flex-col sm:flex-row justify-between items-center">
+        <h3 className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-0">
+          Brand Name
+        </h3>
+        <div className="links flex gap-4 sm:gap-6 md:gap-8">
+          <Link
+            smooth
+            to="#services"
+            className="text-sm sm:text-md md:text-lg font-regular capitalize"
+            ref={(el) => (links.current[0] = el)}
+          >
+            Services
+          </Link>
+          <Link
+            smooth
+            to="#about"
+            className="text-sm sm:text-md md:text-lg font-regular capitalize"
+            ref={(el) => (links.current[1] = el)}
+          >
+            About us
+          </Link>
+          <Link
+            smooth
+            to="#contact"
+            className="text-sm sm:text-md md:text-lg font-regular capitalize"
+            ref={(el) => (links.current[2] = el)}
+            onClick={handleContactClick}
+          >
+            Contact us
+          </Link>
+        </div>
       </div>
+      <ContactForm isVisible={isFormVisible} onClose={() => setIsFormVisible(false)} />
     </div>
   );
-}
+};
 
 export default Navbar;

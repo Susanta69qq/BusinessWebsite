@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "remixicon/fonts/remixicon.css";
+import ContactForm from "./ContactForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +10,7 @@ function Footer() {
 
   const footerHeadSection = useRef(null);
   const buttonSection = useRef(null);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -47,6 +49,11 @@ function Footer() {
     );
   }, [])
 
+  const handleGetStartedClick = (e) => {
+    e.preventDefault();
+    setIsFormVisible(true);
+  }
+
   return (
     <div className="w-full h-screen bg-zinc-900 px-20">
       <div ref={footerHeadSection} className="px-20 py-16 text-center">
@@ -61,7 +68,7 @@ function Footer() {
         </h1>
       </div>
       <div ref={buttonSection} className="w-full flex justify-center">
-        <div className="bg-[#2263EB] px-6 py-3 rounded-md hover:bg-blue-800 hover:text-gray-200 transition-all cursor-pointer">
+        <div onClick={handleGetStartedClick} className="bg-[#2263EB] px-6 py-3 rounded-md hover:bg-blue-800 hover:text-gray-200 transition-all cursor-pointer">
           <a className="font-semibold" href="#">
             Get Started it's free
           </a>
@@ -85,6 +92,7 @@ function Footer() {
           </a>
         </div>
       </footer>
+        <ContactForm isVisible={isFormVisible} onClose={() => setIsFormVisible(false)} />
     </div>
   );
 }

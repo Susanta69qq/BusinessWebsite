@@ -1,11 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { IoIosGitNetwork } from "react-icons/io";
+import ContactForm from "./ContactForm";
 
 function LandingPage() {
   const texts = useRef([]);
   const workWithUs = useRef(null);
   const workWithUsBg = useRef(null);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -67,6 +69,11 @@ function LandingPage() {
       );
   };
 
+  const handleWorkWithUsClick = (e) => {
+    e.preventDefault();
+    setIsFormVisible(true);
+  }
+
   return (
     <div className="w-full h-screen bg-zinc-900 pt-1 flex flex-col justify-between">
       <div className="textStructure mt-[30vh] sm:mt-[30vh] md:mt-[15vw] px-5 md:px-20">
@@ -94,6 +101,7 @@ function LandingPage() {
             style={{ color: "#ffffff" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onClick={handleWorkWithUsClick}
           >
             <div
               ref={workWithUsBg}
@@ -114,6 +122,7 @@ function LandingPage() {
           </div>
         </div>
       </div>
+      <ContactForm isVisible={isFormVisible} onClose={() => setIsFormVisible(false)} />
     </div>
   );
 }
