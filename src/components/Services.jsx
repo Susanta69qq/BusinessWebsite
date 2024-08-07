@@ -143,8 +143,8 @@ const images = [
 ];
 
 const Services = () => {
-  const textSectionRef = useRef(null);
-  const imageSectionRef = useRef(null);
+  const textSectionRef = useRef([]);
+  const imageSectionRef = useRef([]);
   const headingRef = useRef(null);
   const servicesSectionRef = useRef(null);
   const paragraphRef = useRef(null);
@@ -187,8 +187,7 @@ const Services = () => {
       }
     );
 
-    const textSections = textSectionRef.current.children;
-    gsap.utils.toArray(textSections).forEach((section, index) => {
+    textSectionRef.current.forEach((section, index) => {
       gsap.fromTo(
         section,
         { x: index % 2 === 0 ? -100 : 100, opacity: 0 },
@@ -207,8 +206,7 @@ const Services = () => {
       );
     });
 
-    const imageSections = imageSectionRef.current.children;
-    gsap.utils.toArray(imageSections).forEach((image, index) => {
+    imageSectionRef.current.forEach((image, index) => {
       gsap.fromTo(
         image,
         { x: index % 2 === 0 ? 100 : -100, opacity: 0 },
@@ -247,39 +245,40 @@ const Services = () => {
           Harness the power of cutting-edge technology to craft robust and scalable digital solutions. From dynamic web applications to intuitive user interfaces, we deliver exceptional results that drive business growth and enhance user experiences. Transform your vision into reality with our expert web and app development services.
         </p>
 
-        <div className="sections flex justify-center overflow-hidden gap-4 mt-[10vw]">
-          <div className="textSection" ref={textSectionRef}>
-            {sections.map((section, index) => (
-              <div className="flex mb-12 gap-10" key={index}>
-                <section className="p-6 rounded-xl text-white w-[45vw] bg-gray-800">
-                  <h2 className="text-3xl md:text-3xl font-semibold text-blue-600 mb-4 text-center">
-                    {section.title}
-                  </h2>
-                  <p className="mb-6 text-[15px]">{section.description}</p>
-                  <ul className="list-disc list-inside space-y-2 text-[14px]">
-                    {section.items.map((item, idx) => (
-                      <li key={idx}>
-                        <strong>{item.label}:</strong> {item.description}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
+        <div className="sections space-y-10 overflow-hidden">
+          {sections.map((section, index) => (
+            <div
+              key={index}
+              className="flex flex-col lg:flex-row items-stretch gap-6"
+            >
+              <section
+                className="p-6 rounded-xl text-white flex-1 bg-gray-800"
+                ref={el => (textSectionRef.current[index] = el)}
+              >
+                <h2 className="text-3xl md:text-3xl font-semibold text-blue-600 mb-4 text-center">
+                  {section.title}
+                </h2>
+                <p className="mb-6 text-[15px]">{section.description}</p>
+                <ul className="list-disc list-inside space-y-2 text-[14px]">
+                  {section.items.map((item, idx) => (
+                    <li key={idx}>
+                      <strong>{item.label}:</strong> {item.description}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <div
+                className="imageSection flex-1 rounded-xl overflow-hidden"
+                ref={el => (imageSectionRef.current[index] = el)}
+              >
+                <img
+                  className="w-full h-full object-cover rounded-xl border-4 border-spacing-4 border-[#495e7a]"
+                  src={images[index]}
+                  alt={`Service ${index + 1}`}
+                />
               </div>
-            ))}
-          </div>
-          <div
-            className="imageSection w-[45vw] h-[30vw] rounded-xl"
-            ref={imageSectionRef}
-          >
-            {images.map((src, index) => (
-              <img
-                key={index}
-                className="w-full h-full object-cover mb-[3.7vw] rounded-xl border-4 border-spacing-4 border-[#495e7a]"
-                src={src}
-                alt={`Service ${index + 1}`}
-              />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
