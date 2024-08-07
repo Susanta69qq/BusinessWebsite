@@ -13,9 +13,9 @@ const Navbar = () => {
       underline.style.position = "absolute";
       underline.style.left = "0";
       underline.style.bottom = "-18px";
-      underline.style.height = "1px";
+      underline.style.height = "3px";
       underline.style.width = "100%";
-      underline.style.backgroundColor = "#0092FF";
+      underline.style.backgroundColor = "#232323";
       underline.style.transform = "scaleX(0)";
       underline.style.transformOrigin = "right";
       link.style.position = "relative";

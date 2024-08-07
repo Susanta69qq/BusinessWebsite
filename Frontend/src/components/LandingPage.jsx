@@ -72,18 +72,26 @@ function LandingPage() {
   const handleWorkWithUsClick = (e) => {
     e.preventDefault();
     setIsFormVisible(true);
-  }
+  };
 
   return (
-    <div className="w-full h-screen bg-zinc-900 pt-1 flex flex-col justify-between">
-      <div className="textStructure mt-[30vh] sm:mt-[30vh] md:mt-[15vw] px-5 md:px-20">
+    <div className="relative w-full h-screen bg-zinc-900 pt-1 flex flex-col justify-between">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/static/images/bg-image.jpg"
+          alt="background-image"
+          className="w-full h-full object-cover blur-[2px] opacity-50"
+        />
+      </div>
+
+      <div className="textStructure mt-[30vh] sm:mt-[30vh] md:mt-[15vw] px-5 md:px-20 z-10">
         {["Your Vision,", "Our Expertise,", "Web Solutions Made Easy"].map(
           (item, index) => {
             return (
               <div key={index} className="masker">
                 <h1
                   ref={(el) => (texts.current[index] = el)}
-                  className="uppercase text-[11vw] sm:text-[10vw] md:text-[6vw] opacity-80 leading-[14vw] sm:leading-[12vw] md:leading-[7vw] tracking-tighter font-semibold"
+                  className="uppercase text-[11vw] sm:text-[10vw] md:text-[6vw] opacity-80 leading-[14vw] sm:leading-[12vw] md:leading-[7vw] tracking-tighter font-semibold text-white"
                 >
                   {item}
                 </h1>
@@ -92,12 +100,12 @@ function LandingPage() {
           }
         )}
       </div>
-      <div className="divider px-5 md:px-20 mb-10 md:mb-0">
+      <div className="divider px-5 md:px-20 mb-10 md:mb-0 z-10">
         <hr className="opacity-75" />
         <div className="flex justify-end items-center gap-5 mt-3">
           <div
             ref={workWithUs}
-            className="relative px-5 py-2 border-[1px] border-zinc-400 font-light rounded-full flex items-center gap-2 capitalize overflow-hidden"
+            className="relative px-5 py-2 border-[1px] border-zinc-700 font-light rounded-full flex items-center gap-2 capitalize overflow-hidden mb-4"
             style={{ color: "#ffffff" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -122,7 +130,10 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <ContactForm isVisible={isFormVisible} onClose={() => setIsFormVisible(false)} />
+      <ContactForm
+        isVisible={isFormVisible}
+        onClose={() => setIsFormVisible(false)}
+      />
     </div>
   );
 }
